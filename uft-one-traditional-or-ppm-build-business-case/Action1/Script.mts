@@ -1,5 +1,6 @@
 ﻿'===========================================================
 '20201007 - DJ: Initial creation
+'20201014 - DJ: Added a .exist on the create button for the staffing profile.
 '===========================================================
 
 '===========================================================
@@ -147,6 +148,7 @@ AppContext.Sync																				'Wait for the browser to stop spinning
 '===========================================================================================
 'BP:  Click the Create button
 '===========================================================================================
+Browser("Search Requests").Page("Req More Information").WebElement("Create").Exist(10)
 Browser("Search Requests").Page("Req More Information").WebElement("Create").Click
 AppContext2.Maximize																			'Maximize the application to give the best chance that the fields will be visible on the screen
 AppContext2.Sync																				'Wait for the browser to stop spinning
