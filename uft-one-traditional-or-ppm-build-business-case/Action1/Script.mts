@@ -2,6 +2,7 @@
 '20201007 - DJ: Initial creation
 '20201014 - DJ: Added a .exist on the create button for the staffing profile.
 '20201014 - DJ: Turns out the problem was that Chrome decided to block PPM pop-up windows.
+'20210107 - DJ: Updated the selection of the Project and Asset Class fields to be in a loop to set the value, then read it to make sure it was set properly.
 '===========================================================
 
 '===========================================================
@@ -105,12 +106,18 @@ AppContext.Sync																				'Wait for the browser to stop spinning
 '===========================================================================================
 'BP:  Select "Innovation" in the Project Class
 '===========================================================================================
-Browser("Search Requests").Page("Req More Information").WebList("Project Class").Select "Innovation"
+Do
+	Browser("Search Requests").Page("Req More Information").WebList("Project Class").Select "Innovation"
+	AppContext.Sync																				'Wait for the browser to stop spinning
+Loop Until Browser("Search Requests").Page("Req More Information").WebList("Project Class").GetROProperty("Value") = "Innovation"
 
 '===========================================================================================
 'BP:  Select "Infrastructure" in the Asset Class
 '===========================================================================================
-Browser("Search Requests").Page("Req More Information").WebList("Asset Class").Select "Infrastructure"
+Do
+	Browser("Search Requests").Page("Req More Information").WebList("Asset Class").Select "Infrastructure"
+	AppContext.Sync																				'Wait for the browser to stop spinning
+Loop Until Browser("Search Requests").Page("Req More Information").WebList("Asset Class").GetROProperty("Value") = "Infrastructure"
 
 '===========================================================================================
 'BP:  Click the Continue Workflow Action button
