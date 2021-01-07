@@ -3,6 +3,7 @@
 '20201014 - DJ: Added a .exist on the create button for the staffing profile.
 '20201014 - DJ: Turns out the problem was that Chrome decided to block PPM pop-up windows.
 '20210107 - DJ: Updated the selection of the Project and Asset Class fields to be in a loop to set the value, then read it to make sure it was set properly.
+'20210107 - DJ: Added synchronization step to ensure that the workflow action completed before logging out.
 '===========================================================
 
 '===========================================================
@@ -47,7 +48,7 @@ Function PPMProposalSearch (CurrentStatus, NextAction)
 	
 End Function
 
-Dim BrowserExecutable, Counter
+Dim BrowserExecutable, Counter, rc
 
 While Browser("CreationTime:=0").Exist(0)   												'Loop to close all open browsers
 	Browser("CreationTime:=0").Close 
@@ -193,6 +194,8 @@ Browser("Create a Blank Staffing").Page("Staffing Profile").WebElement("Done").C
 'BP:  Click the Continue Workflow Action button
 '===========================================================================================
 Browser("Search Requests").Page("Req More Information").WebElement("Continue Workflow Action Button").Click
+rc = Browser("Search Requests").Page("Req Details").WebElement("Status: Finance Review").Exist(30)
+
 AppContext.Sync																				'Wait for the browser to stop spinning
 
 '===========================================================================================
