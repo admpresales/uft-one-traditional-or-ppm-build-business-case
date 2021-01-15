@@ -4,6 +4,7 @@
 '20201014 - DJ: Turns out the problem was that Chrome decided to block PPM pop-up windows.
 '20210107 - DJ: Updated the selection of the Project and Asset Class fields to be in a loop to set the value, then read it to make sure it was set properly.
 '20210107 - DJ: Added synchronization step to ensure that the workflow action completed before logging out.
+'20210115 - DJ: Turned off smart identification for multiple objects, and then just changed it in the settings.
 '===========================================================
 
 '===========================================================
