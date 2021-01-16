@@ -1,3 +1,3 @@
 ﻿<Properties>
-  <WatchEntry0 value="Browser(&quot;Search Requests&quot;).Page(&quot;Req More Information&quot;).WebList(&quot;Project Class&quot;).GetROProperty(&quot;Value&quot;)" />
+  <WatchEntry0 value="Browser(&quot;Search Requests&quot;).Page(&quot;Req More Information&quot;).WebEdit(&quot;Expected Start Period&quot;).GetROProperty(&quot;Value&quot;)" />
 </Properties>

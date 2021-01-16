@@ -5,6 +5,8 @@
 '20210107 - DJ: Updated the selection of the Project and Asset Class fields to be in a loop to set the value, then read it to make sure it was set properly.
 '20210107 - DJ: Added synchronization step to ensure that the workflow action completed before logging out.
 '20210115 - DJ: Turned off smart identification for multiple objects, and then just changed it in the settings.
+'20210116 - DJ: Added loop to set the start/end dates of the project checking that the value showed up, and a synchronization statement for 
+'				the first field before setting the values, sometimes UFT One executes too fast for PPM
 '===========================================================
 
 '===========================================================
@@ -136,11 +138,21 @@ AppContext.Sync																				'Wait for the browser to stop spinning
 '===========================================================================================
 'BP:  Enter the Expected Start Period as June 2021
 '===========================================================================================
-Browser("Search Requests").Page("Req More Information").WebEdit("Expected Start Period").Set "June " & (Year(Now)+1)
+rc = Browser("Search Requests").Page("Req More Information").WebEdit("Expected Start Period").Exist
+Do
+	Browser("Search Requests").Page("Req More Information").WebEdit("Expected Start Period").Set "June " & (Year(Now)+1)
+	AppContext.Sync																				'Wait for the browser to stop spinning
+Loop Until Browser("Search Requests").Page("Req More Information").WebEdit("Expected Start Period").GetROProperty("Value") = "June " & (Year(Now)+1)
+'Browser("Search Requests").Page("Req More Information").WebEdit("Expected Start Period").Set "June " & (Year(Now)+1)
 
 '===========================================================================================
 'BP:  Enter the Expected Finish Period as December 2021
 '===========================================================================================
+Do
+	Browser("Search Requests").Page("Req More Information").WebEdit("Expected Finish Period").Set "December " & (Year(Now)+1)
+	AppContext.Sync																				'Wait for the browser to stop spinning
+Loop Until Browser("Search Requests").Page("Req More Information").WebEdit("Expected Finish Period").GetROProperty("Value") = "December " & (Year(Now)+1)
+
 Browser("Search Requests").Page("Req More Information").WebEdit("Expected Finish Period").Set "December " & (Year(Now)+1)
 
 '===========================================================================================
